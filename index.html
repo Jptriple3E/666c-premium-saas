@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>666C — Premium Online Game Discovery</title>
+  <meta name="description" content="Discover premium online games through a fast, modern and beautifully designed game discovery platform.">
+  <meta name="theme-color" content="#08080d">
+
+  <style>
+    :root {
+      --bg: #07070b;
+      --bg2: #0d0d14;
+      --card: rgba(255,255,255,.055);
+      --card2: rgba(255,255,255,.08);
+      --text: #f7f7fb;
+      --muted: #a4a4b4;
+      --line: rgba(255,255,255,.1);
+      --primary: #8b5cf6;
+      --primary2: #c084fc;
+      --accent: #22d3ee;
+      --green: #34d399;
+      --max: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 80% 10%, rgba(139,92,246,.18), transparent 28%),
+        radial-gradient(circle at 10% 30%, rgba(34,211,238,.08), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* NAV */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      background: rgba(7,7,11,.72);
+      backdrop-filter: blur(20px);
+    }
+
+    .nav-inner {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 21px;
+      letter-spacing: -.7px;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      box-shadow: 0 8px 30px rgba(139,92,246,.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: #c4c4d0;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-cta {
+      padding: 11px 18px;
+      border-radius: 10px;
+      background: white;
+      color: #09090d;
+      font-weight: 800;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: none;
+      border: 0;
+      color: white;
+      font-size: 25px;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 0 90px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: #d7d7e3;
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+
+    .pulse {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--green);
+    }
+
+    h1 {
+      font-size: clamp(45px, 6vw, 78px);
+      line-height: .98;
+      letter-spacing: -4px;
+      max-width: 760px;
+      margin-bottom: 25px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #fff 10%, #c084fc 50%, #67e8f9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      color: var(--muted);
+      max-width: 620px;
+      font-size: 18px;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 13px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-weight: 800;
+      transition: .25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #6d28d9);
+      box-shadow: 0 15px 40px rgba(139,92,246,.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 50px rgba(139,92,246,.38);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.04);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.09);
+    }
+
+    /* HERO VISUAL */
+
+    .visual {
+      position: relative;
+      min-height: 510px;
+      display: grid;
+      place-items: center;
+    }
+
+    .glow {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(139,92,246,.35), rgba(34,211,238,.2));
+      filter: blur(70px);
+    }
+
+    .dashboard {
+      width: min(100%, 500px);
+      position: relative;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 25px;
+      background: rgba(14,14,22,.88);
+      box-shadow: 0 35px 100px rgba(0,0,0,.5);
+      overflow: hidden;
+      transform: perspective(1000px) rotateY(-5deg) rotateX(3deg);
+    }
+
+    .dash-top {
+      height: 58px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #444;
+    }
+
+    .dash-content {
+      padding: 20px;
+    }
+
+    .search {
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      padding: 0 13px;
+      color: #777789;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .game {
+      aspect-ratio: 1;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 12%),
+        linear-gradient(135deg, #27123e, #111827);
+      border: 1px solid rgba(255,255,255,.09);
+    }
+
+    .game:nth-child(2) {
+      background: linear-gradient(135deg, #164e63, #172554);
+    }
+
+    .game:nth-child(3) {
+      background: linear-gradient(135deg, #3f1d34, #18181b);
+    }
+
+    .game:nth-child(4) {
+      background: linear-gradient(135deg, #422006, #1c1917);
+    }
+
+    .game:nth-child(5) {
+      background: linear-gradient(135deg, #312e81, #111827);
+    }
+
+    .game:nth-child(6) {
+      background: linear-gradient(135deg, #064e3b, #111827);
+    }
+
+    .game-icon {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+    }
+
+    .game-name {
+      position: absolute;
+      left: 9px;
+      bottom: 8px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .float-card {
+      position: absolute;
+      right: -30px;
+      bottom: 40px;
+      padding: 15px 18px;
+      background: rgba(20,20,30,.94);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 15px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+
+    .float-card small {
+      color: var(--muted);
+      display: block;
+      font-size: 10px;
+    }
+
+    .float-card strong {
+      display: block;
+      margin-top: 3px;
+    }
+
+    /* LOGOS */
+
+    .trust {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 24px 0;
+      color: #777789;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 105px 0;
+    }
+
+    .section-head {
+      max-width: 700px;
+      margin-bottom: 50px;
+    }
+
+    .eyebrow {
+      color: #a78bfa;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 11px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 55px);
+      line-height: 1.05;
+      letter-spacing: -2.5px;
+      margin-bottom: 16px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* FEATURES */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      padding: 30px;
+      min-height: 240px;
+      background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      transition: .3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-7px);
+      border-color: rgba(167,139,250,.35);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(139,92,246,.12);
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* SHOWCASE */
+
+    .showcase {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      color: #c9c9d3;
+    }
+
+    .check {
+      flex: 0 0 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(52,211,153,.12);
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    .analytics {
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(145deg, #101019, #0b0b10);
+    }
+
+    .analytics-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .analytics-header span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .chart {
+      height: 220px;
+      display: flex;
+      align-items: end;
+      gap: 10px;
+      padding-top: 25px;
+    }
+
+    .bar {
+      flex: 1;
+      height: 30%;
+      border-radius: 8px 8px 2px 2px;
+      background: linear-gradient(to top, #6d28d9, #c084fc);
+      opacity: .85;
+      animation: grow 1.2s ease forwards;
+      transform-origin: bottom;
+    }
+
+    .bar:nth-child(2) { height: 42%; }
+    .bar:nth-child(3) { height: 36%; }
+    .bar:nth-child(4) { height: 58%; }
+    .bar:nth-child(5) { height: 51%; }
+    .bar:nth-child(6) { height: 73%; }
+    .bar:nth-child(7) { height: 88%; }
+
+    @keyframes grow {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
+
+    /* STEPS */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+    }
+
+    .step {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .number {
+      font-size: 12px;
+      color: #a78bfa;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    .step h3 {
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* TESTIMONIAL */
+
+    .quote {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .stars {
+      letter-spacing: 5px;
+      margin-bottom: 20px;
+    }
+
+    blockquote {
+      font-size: clamp(25px,4vw,40px);
+      line-height: 1.2;
+      letter-spacing: -1.5px;
+    }
+
+    .quote-author {
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* CTA */
+
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+      padding: 75px 30px;
+      text-align: center;
+      border-radius: 30px;
+      border: 1px solid rgba(167,139,250,.22);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(139,92,246,.28), transparent 50%),
+        linear-gradient(145deg, #11101c, #0b0b11);
+    }
+
+    .cta-box h2 {
+      max-width: 760px;
+      margin: 0 auto 18px;
+    }
+
+    .cta-box p {
+      max-width: 590px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+    }
+
+    /* FAQ */
+
+    .faq {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    details {
+      border-bottom: 1px solid var(--line);
+      padding: 20px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    summary::after {
+      content: "+";
+      color: #a78bfa;
+      font-size: 20px;
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    details p {
+      color: var(--muted);
+      padding-top: 15px;
+      font-size: 14px;
+      max-width: 700px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      color: #777789;
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* REVEAL */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 125px;
+      }
+
+      .visual {
+        min-height: 430px;
+      }
+
+      .features,
+      .steps {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      h1 {
+        font-size: 48px;
+        letter-spacing: -2.8px;
+      }
+
+      h2 {
+        letter-spacing: -1.8px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .features,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard {
+        transform: none;
+      }
+
+      .float-card {
+        right: 0;
+      }
+
+      .game-grid {
+        gap: 8px;
+      }
+
+      .game-icon {
+        font-size: 25px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container nav-inner">
+
+      <a href="#" class="logo">
+        <span class="logo-mark">6C</span>
+        <span>666C</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#discover">Discover</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+        <a href="#start" class="nav-cta">Get Started</a>
+      </div>
+
+      <button class="mobile-menu" onclick="toggleMenu()" aria-label="Menu">
+        ☰
+      </button>
+
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <main>
+
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div class="reveal">
+
+          <div class="badge">
+            <span class="pulse"></span>
+            Premium game discovery platform
+          </div>
+
+          <h1>
+            Discover your next
+            <span class="gradient-text">favorite game.</span>
+          </h1>
+
+          <p class="hero-text">
+            A faster, smarter and more beautiful way to explore
+            premium online games. Browse curated experiences,
+            discover new titles and find something worth playing.
+          </p>
+
+          <div class="buttons">
+            <a href="#discover" class="btn btn-primary">
+              Explore Games →
+            </a>
+
+            <a href="#how" class="btn btn-secondary">
+              See How It Works
+            </a>
+          </div>
+
+        </div>
+
+
+        <div class="visual reveal">
+
+          <div class="glow"></div>
+
+          <div class="dashboard">
+
+            <div class="dash-top">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+
+            <div class="dash-content">
+
+              <div class="search">
+                🔍 &nbsp; Search your next game...
+              </div>
+
+              <div class="game-grid">
+
+                <div class="game">
+                  <div class="game-icon">♛</div>
+                  <span class="game-name">Royal Quest</span>
+                </div>
+
+                <div class="game">
+                  <div class="game-icon">⚡</div>
+                  <span class="game-name">Neon Rush</span>
+                </div>
+
+                <div class="game">
+                  <div class="game-icon">🔥</div>
+                  <span class="game-name">Fire Realm</span>
+                </div>
+
+                <div class="game">
+                  <div class="game-icon">💎</div>
+                  <span class="game-name">Diamond</span>
+                </div>
+
+                <div class="game">
+                  <div class="game-icon">🌙</div>
+                  <span class="game-name">Moonlight</span>
+                </div>
+
+                <div class="game">
+                  <div class="game-icon">👑</div>
+                  <span class="game-name">Empire</span>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="float-card">
+            <small>Discovering today</small>
+            <strong>2,400+ titles</strong>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- TRUST -->
+    <div class="trust">
+      <div class="container">
+        BUILT FOR FAST DISCOVERY · CLEAN DESIGN · MOBILE FIRST · EASY TO EXPLORE
+      </div>
+    </div>
+
+
+    <!-- FEATURES -->
+    <section id="features">
+
+      <div class="container">
+
+        <div class="section-head reveal">
+          <div class="eyebrow">Why 666C</div>
+          <h2>Everything you need to discover better games.</h2>
+          <p>
+            Designed around speed, simplicity and a premium browsing experience.
+          </p>
+        </div>
+
+        <div class="features">
+
+          <article class="feature reveal">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast Discovery</h3>
+            <p>
+              Find interesting titles quickly with a clean,
+              focused interface built for effortless browsing.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature-icon">◈</div>
+            <h3>Curated Selection</h3>
+            <p>
+              Explore a carefully organized collection instead
+              of wasting time searching through clutter.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature-icon">◎</div>
+            <h3>Smart Search</h3>
+            <p>
+              Search by title, category or what you feel like
+              exploring today.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature-icon">▣</div>
+            <h3>Mobile Ready</h3>
+            <p>
+              Enjoy the same polished experience whether you're
+              using a phone, tablet or desktop.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature-icon">✦</div>
+            <h3>Premium Experience</h3>
+            <p>
+              Beautiful layouts, smooth interactions and
+              distraction-free navigation.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature-icon">↗</div>
+            <h3>Always Improving</h3>
+            <p>
+              Discover new experiences as the platform continues
+              to grow and evolve.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SHOWCASE -->
+    <section id="discover">
+
+      <div class="container showcase">
+
+        <div class="reveal">
+
+          <div class="eyebrow">Built for discovery</div>
+
+          <h2>
+            Less searching.
+            More discovering.
+          </h2>
+
+          <p class="hero-text">
+            We've designed the experience around one simple idea:
+            help people get from “What should I play?” to
+            “This looks interesting” faster.
+          </p>
+
+          <ul class="check-list">
+
+            <li>
+              <span class="check">✓</span>
+              <span>Clean categories and organized discovery</span>
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              <span>Fast and responsive interface</span>
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              <span>Designed for modern mobile users</span>
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              <span>Simple experience without unnecessary clutter</span>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <div class="analytics reveal">
+
+          <div class="analytics-header">
+            <strong>Discovery activity</strong>
+            <span>Last 7 days</span>
+          </div>
+
+          <div class="chart">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;color:#777789;font-size:11px;">
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+            <span>Sun</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+
+      <div class="container">
+
+        <div class="section-head reveal">
+          <div class="eyebrow">Simple by design</div>
+          <h2>Find something interesting in three steps.</h2>
+        </div>
+
+        <div class="steps">
+
+          <div class="step reveal">
+            <div class="number">01 — DISCOVER</div>
+            <h3>Explore</h3>
+            <p>
+              Start with the latest and most interesting titles
+              available on the platform.
+            </p>
+          </div>
+
+          <div class="step reveal">
+            <div class="number">02 — FILTER</div>
+            <h3>Find your style</h3>
+            <p>
+              Browse categories and narrow down the experience
+              you're looking for.
+            </p>
+          </div>
+
+          <div class="step reveal">
+            <div class="number">03 — ENJOY</div>
+            <h3>Choose your favorite</h3>
+            <p>
+              Open a title and continue to the available
+              experience or information.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- TESTIMONIAL -->
+    <section>
+
+      <div class="container">
+
+        <div class="quote reveal">
+
+          <div class="stars">★★★★★</div>
+
+          <blockquote>
+            “Finally, a game discovery experience that feels
+            modern instead of overwhelming.”
+          </blockquote>
+
+          <div class="quote-author">
+            — Early platform user
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section id="start">
+
+      <div class="container">
+
+        <div class="cta-box reveal">
+
+          <div class="eyebrow">Start discovering</div>
+
+          <h2>
+            Your next favorite experience
+            could be one click away.
+          </h2>
+
+          <p>
+            Explore the platform and discover a cleaner,
+            faster way to find games you'll want to come back to.
+          </p>
+
+          <a href="#discover" class="btn btn-primary">
+            Explore the Platform →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FAQ -->
+    <section id="faq">
+
+      <div class="container">
+
+        <div class="section-head reveal">
+          <div class="eyebrow">FAQ</div>
+          <h2>Questions, answered.</h2>
+        </div>
+
+        <div class="faq reveal">
+
+          <details>
+            <summary>What is 666C?</summary>
+            <p>
+              666C is designed as a modern game discovery platform
+              where users can browse and explore online game titles.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I use it on my phone?</summary>
+            <p>
+              Yes. The interface is designed mobile-first and
+              adapts to phones, tablets and desktop screens.
+            </p>
+          </details>
+
+          <details>
+            <summary>How do I discover games?</summary>
+            <p>
+              Browse the available categories, explore featured
+              titles or use the search experience to find something
+              that interests you.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is an account required?</summary>
+            <p>
+              The exact account requirements can be configured
+              depending on the final platform experience.
+            </p>
+          </details>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div>
+        © <span id="year"></span> 666C. All rights reserved.
+      </div>
+
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    // Current year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => {
+      observer.observe(el);
+    });
+
+
+    // Mobile menu
+    function toggleMenu() {
+      const links = document.querySelector(".nav-links");
+
+      if (links.style.display === "flex") {
+        links.style.display = "";
+      } else {
+        links.style.display = "flex";
+        links.style.position = "absolute";
+        links.style.top = "74px";
+        links.style.left = "14px";
+        links.style.right = "14px";
+        links.style.padding = "20px";
+        links.style.flexDirection = "column";
+        links.style.alignItems = "stretch";
+        links.style.background = "rgba(12,12,18,.98)";
+        links.style.border = "1px solid rgba(255,255,255,.1)";
+        links.style.borderRadius = "15px";
+      }
+    }
+
+
+    // Close mobile menu after clicking
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 900) {
+          document.querySelector(".nav-links").style.display = "none";
+        }
+      });
+    });
+
+  </script>
+
+</body>
+  </html>
